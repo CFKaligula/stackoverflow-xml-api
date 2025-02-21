@@ -4,6 +4,9 @@ from resources.so_xml_analyser import StackOverflowXMLAnalyser
 
 
 def test_load_url():
+    """
+    Test `get_xml_from_url()`
+    """
     xml_url = 'https://merapar-assessment-task.s3.eu-central-1.amazonaws.com/arabic-posts.xml'
 
     xml = StackOverflowXMLAnalyser.get_xml_from_url(xml_url)
@@ -13,11 +16,14 @@ def test_load_url():
 
 
 def test_analyse():
+    """
+    Test `analyse_xml()`
+    """
     xml_url = 'https://merapar-assessment-task.s3.eu-central-1.amazonaws.com/arabic-posts.xml'
-    analyser = StackOverflowXMLAnalyser()
 
-    xml = analyser.get_xml_from_url(xml_url)
-    analysis_dict = analyser.analyse_xml(xml)
+    xml = StackOverflowXMLAnalyser.get_xml_from_url(xml_url)
+    analysis_dict = StackOverflowXMLAnalyser.analyse_xml(xml)
+
     print(analysis_dict)
 
     assert analysis_dict == {

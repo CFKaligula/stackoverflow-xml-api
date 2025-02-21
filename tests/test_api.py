@@ -14,13 +14,13 @@ def client():
 
 def test_so_xml_analyser(client):
     xml_url = 'https://merapar-assessment-task.s3.eu-central-1.amazonaws.com/arabic-posts.xml'
-    response = client.post('analyze', data={'url': xml_url})
+    response = client.post('analyse', data={'url': xml_url})
 
     response_json = response.get_json()
     analyse_date = response_json.pop('analyse_date')
 
     assert response.status_code == 200
-    # assert analyze date is close to current time
+    # assert analyse date is close to current time
     assert (datetime.datetime.fromisoformat(analyse_date) - datetime.datetime.now(tz=datetime.timezone.utc)) < datetime.timedelta(minutes=1)
 
     assert response_json == {
