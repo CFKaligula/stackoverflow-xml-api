@@ -12,11 +12,8 @@ class StackOverflowXMLAnalyser(Resource):
     """
 
     request_url_key = 'url'
-    xml_date_key = 'CreationDate'
-    xml_score_key = 'Score'
-    xml_accepted_key = 'AcceptedAnswerId'
 
-    def post(self):
+    def post(self) -> dict:
         xml_url = request.form[self.request_url_key]
 
         try:
@@ -40,32 +37,37 @@ class StackOverflowXMLAnalyser(Resource):
         root: ET.Element = ET.fromstring(response.content.decode())
         return root
 
-    def analyse_xml(self, xml: ET.Element):
+    @staticmethod
+    def analyse_xml(xml: ET.Element) -> dict:
         """
         Analyses a parsed `xml` Element that is assumed to be a StackOverflow XML file.
-        Returns a `dict` with:
+        Returns a dictionary with:
 
-        * the total number of posts;
-        * total number of accepted posts
-        * average score per post
-        * creation date of the first post
-        * creation date of the last post
-
+        * the total number of posts (`num_posts`)
+        * total number of accepted posts (`num_accepted_posts`)
+        * average score per post (`average_score`)
+        * creation date of the first post (`first_post_date`)
+        * creation date of the last post (`last_post_date`)
         """
+
+        date_key = 'CreationDate'
+        score_key = 'Score'
+        accepted_key = 'AcceptedAnswerId'
+
         rows = xml.findall('.//row')
 
         total_score = 0
         num_accepted = 0
         for row in rows:
-            total_score += int(row.get(self.xml_score_key, 0))
+            total_score += int(row.get(score_key, 0))
 
-            if self.xml_accepted_key in row.keys():
+            if accepted_key in row.keys():
                 num_accepted += 1
 
         return {
             'num_posts': len(xml),
             'num_accepted_posts': num_accepted,
             'average_score': int(round(total_score / len(xml))),
-            'first_post_date': rows[0].get(self.xml_date_key),
-            'last_post_date': rows[-1].get(self.xml_date_key),
+            'first_post_date': rows[0].get(date_key),
+            'last_post_date': rows[-1].get(date_key),
         }
