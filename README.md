@@ -8,13 +8,15 @@ Requirements:
 
 The package installer `uv` is used. Either install this or use your desired package installer and install the dependencies described in the `pyproject.toml`.
 
-To install dependencies with `uv` run:
+To install dependencies with `uv`, run:
 
 ```bash
 uv sync
 ```
 
-## Run the API locally
+## Local Setup
+
+### Basic Setup
 
 To run the API in the terminal use the following command:
 
@@ -22,12 +24,16 @@ To run the API in the terminal use the following command:
 python main.py
 ```
 
+### Setup with Docker
+
 To run the API in a docker container build and run the docker container with the usual commands:
 
 ```bash
 docker build -t xml-flask-api .
 docker run -p 5000:5000 xml-flask-api
 ```
+
+## Using the API
 
 You can now send an HTTP POST request to `http://127.0.0.1:5000/analyse` with a `url` field in the data field, linking to an XML file.
 

@@ -1,7 +1,7 @@
 [project]
-name = "xml_api"
+name = "stackoverflow_xml_api"
 version = "0.1.0"
-description = "An API to analyse the content of large XML files."
+description = "An API to analyse the content of XML files from Stack Overflow."
 readme = "README.md"
 requires-python = ">=3.11"
 dependencies = [
@@ -13,7 +13,6 @@ dependencies = [
 [dependency-groups]
 dev = [
     "pytest>=8.3.4",
-    "requests>=2.32.3",
     "types-requests>=2.32.0.20241016",
 ]
 
