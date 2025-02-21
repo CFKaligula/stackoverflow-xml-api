@@ -37,15 +37,17 @@ docker run -p 5000:5000 xml-flask-api
 
 You can now send an HTTP POST request to `http://127.0.0.1:5000/analyse` with a `url` field in the data field, linking to an XML file.
 
-Example using curl:
+### Example using curl
 
 ```bash
 curl http://localhost:5000/xml -d "url=https://merapar-assessment-task.s3.eu-central-1.amazonaws.com/3dprinting-posts.xml" -X POST
 ```
 
-Example using `request` library in Python:
+### Example using the Python `requests` library
 
 ```python
+import requests
+
 xml_url = 'https://merapar-assessment-task.s3.eu-central-1.amazonaws.com/arabic-posts.xml'
 response = requests.post('http://127.0.0.1:5000/analyse', data={'url': xml_url})
 print(response.json())
