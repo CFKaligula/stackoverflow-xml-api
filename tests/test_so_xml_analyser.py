@@ -34,7 +34,10 @@ def test_analyse2():
 
 
 def test_very_large():
-    xml_file_path = r'C:\Users\caspe\Downloads\superuser.xml\Posts.xml'
+    """
+    Download the file from Internet Archive for testing.
+    """
+    xml_file_path = r'.\tests\assets\Posts.xml'
 
     analysis_dict = StackOverflowXMLAnalyser.analyse_xml_file_via_file_path(xml_file_path)
 
